@@ -7,10 +7,10 @@ function HeroSection() {
         {/* Left: Headline & description */}
         <div className="hero-text">
         <h1 className="hero-title">
-  <span className="line">Stay</span>
-  <span className="line">Informed,</span>
-  <span className="line">Stay Inspired</span>
-</h1>
+            <span className="line">Stay</span>
+            <span className="line">Informed,</span>
+            <span className="line">Stay Inspired</span>
+        </h1>
           
           <p className="hero-description">
             Discover a World of Knowledge at Your Fingertips. Your Daily Dose of Inspiration
