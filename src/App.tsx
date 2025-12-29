@@ -1,14 +1,16 @@
 import './App.css'
 import NavBar from './components/NavBar'
 import HeroSection from './components/HeroSection'
+import LatestArticles from './components/LatestArticles'
+import Footer from './components/Footer'
 
-function App() {
+export default function App() {
   return (
     <div className="app">
       <NavBar />
       <HeroSection />
+      <LatestArticles />
+      <Footer />
     </div>
   )
 }
-
-export default App

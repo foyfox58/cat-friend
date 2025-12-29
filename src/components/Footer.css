@@ -1,0 +1,132 @@
+.footer {
+    width: 100%;
+    height: 120px;
+    background-color: #f4f2ee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    box-sizing: border-box;
+  }
+  
+  /* Center icons */
+  .footer-center {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .footer-left-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* ระยะห่างระหว่าง text กับ icon */
+  } 
+
+  
+  .social-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #000;   
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;              
+  }
+  
+  /* Right */
+  .footer-right a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  .footer-text {
+    font-size: 24px;
+    margin-left: 150px; /* ขยับไปขวา 100px */
+  }
+
+  .footer-right a {
+    margin-right: 100px;
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      padding: 2rem 1rem;
+      gap: 1rem;
+      text-align: center;
+    }
+  
+    /* บรรทัดบน: Get in touch + icons */
+    .footer-left-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0;               /* สำคัญ */
+    }
+  
+    .footer-text {
+      margin: 0;               /* กัน text หลุด */
+      white-space: nowrap;     /* ❗ ห้ามแตกบรรทัด */
+    }
+  
+    .footer-center {
+      display: flex;
+      gap: 8px;
+    }
+  
+    /* บรรทัดล่าง: Home page */
+    .footer-right {
+        width: 100%;
+        margin: 0 !important;          /* ❗ ล้าง margin เดิม */
+        padding: 0 !important;         /* ❗ ล้าง padding เดิม */
+        display: flex;
+        justify-content: center;
+      }
+  
+      .footer-right a {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+    }
+  
+    @media (max-width: 768px) {
+        .latest-articles {
+          padding: 2rem 1.5rem;
+        }
+      
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 1rem;
+        }
+      
+        .filter-bar {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1rem;
+        }
+      
+        .category-list {
+          overflow-x: auto;
+          gap: 8px;
+        }
+      
+        .category {
+          flex: 1 0 auto;
+          white-space: nowrap;
+          padding: 8px 12px;
+        }
+      
+        .search-box {
+          width: 100%;
+        }
+      
+        .search-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
