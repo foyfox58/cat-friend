@@ -1,14 +1,19 @@
 import "./LatestArticles.css";
 import { Search } from "lucide-react";
 
-// import shadcn select components
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "../components/ui/select"; // ปรับ path ตามโปรเจกต์คุณ
+} from "../components/ui/select";
+
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
 
 function LatestArticles() {
   return (
@@ -16,13 +21,59 @@ function LatestArticles() {
       <h2 className="section-title">Latest articles</h2>
 
       <div className="filter-bar">
-        {/* Desktop category buttons */}
-        <div className="category-list">
-          <button className="category active">Highlight</button>
-          <button className="category">Cat</button>
-          <button className="category">Inspiration</button>
-          <button className="category">General</button>
-        </div>
+
+        {/* Desktop category tabs */}
+<Tabs defaultValue="highlight" className="category-list">
+  <TabsList className="bg-transparent p-0 gap-2">
+    <TabsTrigger
+      value="highlight"
+      className="
+        bg-transparent
+        shadow-none
+        data-[state=active]:bg-white
+        data-[state=active]:text-black
+      "
+    >
+      Highlight
+    </TabsTrigger>
+
+    <TabsTrigger
+      value="cat"
+      className="
+        bg-transparent
+        shadow-none
+        data-[state=active]:bg-white
+        data-[state=active]:text-black
+      "
+    >
+      Cat
+    </TabsTrigger>
+
+    <TabsTrigger
+      value="inspiration"
+      className="
+        bg-transparent
+        shadow-none
+        data-[state=active]:bg-white
+        data-[state=active]:text-black
+      "
+    >
+      Inspiration
+    </TabsTrigger>
+
+    <TabsTrigger
+      value="general"
+      className="
+        bg-transparent
+        shadow-none
+        data-[state=active]:bg-white
+        data-[state=active]:text-black
+      "
+    >
+      General
+    </TabsTrigger>
+  </TabsList>
+</Tabs>
 
         {/* Search box */}
         <div className="search-box">
@@ -45,6 +96,7 @@ function LatestArticles() {
             </SelectContent>
           </Select>
         </div>
+
       </div>
     </section>
   );
