@@ -1,0 +1,73 @@
+.blog-section {
+  width: 100%;             
+  max-width: 2000px;         
+  margin: 0 auto;          
+  padding: 20px;           
+  display: flex;
+  flex-direction: column;
+  gap: 40px;               
+}
+
+/* Grid ของ BlogCard */
+.blog-section .latest-articles__grid {
+  display: flex;
+  flex-direction: column; /* stack card ลงมา mobile */
+  gap: 24px;              
+  margin-top: 0;          
+}
+
+.blog-view-more {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.blog-view-more a {
+  display: inline-block;
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+}
+
+.blog-view-more a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background-color: #111827;
+}
+
+@media (min-width: 768px) {
+  /* Grid layout 2 columns สำหรับ tablet+ */
+  
+  .blog-section .latest-articles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns เท่านั้น */
+    gap: 32px;
+    margin-top: 0;
+   }
+   .blog-view-more {
+    margin-top: 100px; /* เพิ่มระยะห่าง (Margin) จาก Blog Card แถวสุดท้าย */
+    margin-bottom: 100px; /* ระยะห่างด้านล่าง section */
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* สไตล์ของตัวลิงก์ */
+  .blog-view-more a {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #111827;
+    text-decoration: none;
+    
+    /* เทคนิคการทำเส้นใต้ให้มีระยะห่างที่สวยงาม */
+   
+  }
+  
+  /* เพิ่ม Effect เวลาเอาเมาส์ไปวาง */
+
+  }

@@ -1,8 +1,11 @@
 import './App.css'
-import NavBar from './components/NavBar'
-import HeroSection from './components/HeroSection'
-import LatestArticles from './components/LatestArticles'
-import Footer from './components/Footer'
+import NavBar from './components/landing-page/NavBar'
+import HeroSection from './components/landing-page/HeroSection'
+import LatestArticles from './components/landing-page/LatestArticles'
+import Footer from './components/landing-page/Footer'
+import BlogCard from './components/landing-page/BlogCard'
+import BlogSection from './components/landing-page/BlogSection'
+
 
 export default function App() {
   return (
@@ -10,7 +13,10 @@ export default function App() {
       <NavBar />
       <HeroSection />
       <LatestArticles />
+      <BlogSection />
       <Footer />
+      
+
     </div>
   )
 }

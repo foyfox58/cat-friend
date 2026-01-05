@@ -1,0 +1,90 @@
+/* Blog Card */
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* IMAGE */
+.blog-card__image {
+  width: 100%;
+  height: 212px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.blog-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.blog-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blog-card__category {
+  width: fit-content;
+  background-color: #d1fae5;
+  color: #059669;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.blog-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card__description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* META */
+.blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  margin-top: 4px;
+}
+
+.blog-card__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.blog-card__separator {
+  color: #d1d5db;
+}
+
+/* ================= 2. DESKTOP / TABLET ================= */
+@media (min-width: 768px) {
+  /* Grid layout 2 columns สำหรับ tablet+ */
+   .blog-card__image {
+    height: 500px; /* สูงขึ้นบนหน้าจอใหญ่ */
+  }
+}
