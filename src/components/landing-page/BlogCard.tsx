@@ -1,12 +1,13 @@
 import "./BlogCard.css";
 
 type BlogCardProps = {
-  image: string;
-  category: string;
+  image?: string;
+  category?: string;
   title: string;
   description: string;
   author: string;
   date: string;
+  avatar?: string; // optional
 };
 
 function BlogCard({
@@ -16,28 +17,31 @@ function BlogCard({
   description,
   author,
   date,
+  avatar,
 }: BlogCardProps) {
-  // Avatar แบบ fixed ตามโค้ดตัวอย่าง
-  const avatarUrl = "https://res.cloudinary.com/dcbpjtd1r/image/upload/v1728449784/my-blog-post/xgfy0xnvyemkklcqodkg.jpg";
+
+  // ✅ avatar default (เหมือนที่คุณใช้ก่อนหน้า)
+  const avatarUrl =
+    avatar ||
+    "https://res.cloudinary.com/dcbpjtd1r/image/upload/v1728449784/my-blog-post/xgfy0xnvyemkklcqodkg.jpg";
 
   return (
     <article className="blog-card">
-      {/* ถ้าใน Design จริงไม่มีรูปใหญ่ด้านบน สามารถ comment ส่วนนี้ออกได้ครับ */}
-      {image && (
+      {image?.trim() && (
         <div className="blog-card__image">
-          <img src={image} alt={title} />
+          <img src={image} alt={title || "blog image"} />
         </div>
       )}
 
       <div className="blog-card__content">
-        {/* category อาจจะซ่อนไว้ถ้าในรูปตัวอย่างไม่มี */}
-        {/* <span className="blog-card__category">{category}</span> */}
+        {category && (
+          <span className="blog-card__category">{category}</span>
+        )}
 
         <h3 className="blog-card__title">{title}</h3>
 
         <p className="blog-card__description">{description}</p>
 
-        {/* ส่วนข้อมูลผู้เขียนและวันที่ */}
         <div className="blog-card__meta">
           <img
             src={avatarUrl}
