@@ -5,6 +5,7 @@ import LatestArticles from './components/landing-page/LatestArticles'
 import Footer from './components/landing-page/Footer'
 import BlogCard from './components/landing-page/BlogCard'
 import BlogSection from './components/landing-page/BlogSection'
+import ArticlesSection from './components/landing-page/ArticlesSection'
 
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
     <div className="app">
       <NavBar />
       <HeroSection />
-      <LatestArticles />
+      <ArticlesSection />
       <BlogSection />
       <Footer />
       
