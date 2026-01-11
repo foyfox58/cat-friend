@@ -28,6 +28,25 @@
   gap: 12px;
 }
 
+/* Category Filter Buttons */
+.category-filter-btn {
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.category-filter-btn-selected {
+  background-color: #d4d0c8 !important;
+  color: #26231e !important;
+}
+
+.category-filter-btn-selected:hover {
+  background-color: #d4d0c8 !important;
+}
+
+.category-filter-btn-unselected:hover {
+  background-color: #f5f3ef !important;
+}
+
 /* Search */
 .search-box {
   display: flex;

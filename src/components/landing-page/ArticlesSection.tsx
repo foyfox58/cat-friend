@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./LatestArticles.css";
 import { Search } from "lucide-react";
 import { Button } from "../ui/button";
@@ -13,6 +14,8 @@ import {
 const categories = ["Highlight", "Cat", "Inspiration", "General"];
 
 function ArticlesSection() {
+  const [category, setCategory] = useState("Highlight");
+
   return (
     <section className="latest-articles">
       <h2 className="section-title">Latest articles</h2>
@@ -21,16 +24,23 @@ function ArticlesSection() {
 
         {/* Desktop Category */}
         <div className="hidden md:flex space-x-2">
-          {categories.map((category, index) => (
-            <Button
-              key={index}
-              size="sm"
-              variant="ghost"
-              className="rounded-sm"
-            >
-              {category}
-            </Button>
-          ))}
+          {categories.map((categoryItem, index) => {
+            const isSelected = category === categoryItem;
+            return (
+              <Button
+                key={index}
+                size="sm"
+                variant="ghost"
+                className={`category-filter-btn ${
+                  isSelected ? "category-filter-btn-selected" : "category-filter-btn-unselected"
+                }`}
+                disabled={isSelected}
+                onClick={() => setCategory(categoryItem)}
+              >
+                {categoryItem}
+              </Button>
+            );
+          })}
         </div>
 
         {/* Search */}
@@ -43,18 +53,21 @@ function ArticlesSection() {
         <div className="category-mobile">
           <label className="category-label">Category</label>
 
-          <Select defaultValue="highlight">
+          <Select 
+            value={category.toLowerCase()} 
+            onValueChange={(value) => setCategory(value.charAt(0).toUpperCase() + value.slice(1))}
+          >
             <SelectTrigger className="mobile-select-trigger">
               <SelectValue placeholder="Highlight" />
             </SelectTrigger>
 
             <SelectContent>
-              {categories.map((category, index) => (
+              {categories.map((categoryItem, index) => (
                 <SelectItem
                   key={index}
-                  value={category.toLowerCase()}
+                  value={categoryItem.toLowerCase()}
                 >
-                  {category}
+                  {categoryItem}
                 </SelectItem>
               ))}
             </SelectContent>

@@ -1,8 +1,9 @@
+/* Navbar */
 .navbar {
   width: 100%;
-  padding: 1.5rem 3rem;
+  padding: 1rem 1.5rem;
   background-color: var(--color-white);
-  border-bottom: 2px solid var(--color-brown-300);
+  border-bottom: 1px solid var(--color-brown-300);
 }
 
 .navbar-container {
@@ -13,6 +14,7 @@
   align-items: center;
 }
 
+/* Logo */
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -23,7 +25,6 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--color-brown-600);
-  font-family: var(--font-family-sans);
 }
 
 .logo-dot {
@@ -31,50 +32,30 @@
   height: 0.5rem;
   background-color: var(--color-brand-green);
   border-radius: 50%;
-  display: inline-block;
 }
 
+/* Desktop Buttons */
 .navbar-buttons {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .btn-login {
-  padding: 0.625rem 2.5rem;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-brown-300);
-  color: var(--color-brown-600);
-  font-size: var(--font-size-body-1);
-  font-weight: var(--font-weight-body);
+  padding: 0.5rem 2rem;
   border-radius: 3rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-family-sans);
-}
-
-.btn-login:hover {
-  background-color: var(--color-brown-100);
+  border: 1px solid var(--color-brown-300);
+  background: white;
 }
 
 .btn-signup {
-  padding: 0.625rem 2.5rem;
-  background-color: var(--color-brown-600);
-  border: none;
-  color: var(--color-white);
-  font-size: var(--font-size-body-1);
-  font-weight: var(--font-weight-body);
+  padding: 0.5rem 2rem;
   border-radius: 3rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-family-sans);
+  background: var(--color-brown-600);
+  color: white;
+  border: none;
 }
 
-.btn-signup:hover {
-  background-color: var(--color-brown-500);
-}
-
-/* Hamburger Menu */
+/* Hamburger */
 .hamburger-menu {
   display: none;
   flex-direction: column;
@@ -82,38 +63,57 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
 }
 
 .hamburger-line {
   width: 24px;
   height: 2px;
   background-color: var(--color-brown-600);
-  transition: all 0.3s ease;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem 1.5rem;
-  }
+/* Mobile Action Bar */
+.mobile-action-bar {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-brown-300);
+  padding: 1rem 1.5rem;
 
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Mobile Buttons */
+.btn-login-mobile,
+.btn-signup-mobile {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 3rem;
+  font-size: 1rem;
+}
+
+.btn-login-mobile {
+  border: 1px solid var(--color-brown-300);
+  background: white;
+}
+
+.btn-signup-mobile {
+  background: var(--color-brown-600);
+  color: white;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .desktop-only {
     display: none;
   }
-
   .mobile-only {
     display: flex;
   }
 }
 
 @media (min-width: 769px) {
-  .desktop-only {
-    display: flex;
-  }
-
   .mobile-only {
     display: none;
   }
 }
-
