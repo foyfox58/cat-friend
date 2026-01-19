@@ -20,13 +20,19 @@ function ArticlesSection() {
   const [category, setCategory] = useState("Highlight");
   const [posts, setPosts] = useState<any[]>([]);
   const [keyword, setKeyword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPosts = async () => {
-    setLoading(true);
+    if (isLoading || !hasMore) return;
+
+    setIsLoading(true);
+
     try {
       const params: any = {
-        page: 1,
+        page,
         limit: 6,
       };
 
@@ -39,56 +45,81 @@ function ArticlesSection() {
       }
 
       const res = await axios.get(`${BASE_URL}/posts`, { params });
-      setPosts(res.data.posts || []);
-    } catch (err) {
-      console.error(err);
+      const newPosts = res.data.posts || [];
+
+      setPosts((prev) => [...prev, ...newPosts]);
+
+      if (res.data.currentPage >= res.data.totalPages) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error(error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
+  // ✅ โหลดเพิ่มเมื่อ page หรือ category เปลี่ยน
   useEffect(() => {
     fetchPosts();
-  }, [category, keyword]);
+  }, [page, category]);
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const handleChangeCategory = (value: string) => {
+    if (value === category) return;
+
+    setCategory(value);
+    setPosts([]);
+    setPage(1);
+    setHasMore(true);
+  };
 
   return (
     <section className="latest-articles">
       {/* FILTER BAR */}
       <div className="filter-bar">
-        {/* 🖥 Desktop (CSS จะซ่อนเองใน mobile) */}
+        {/* Desktop */}
         <div className="category-list">
-          {categories.map((item) => (
+          {categories.map((cat) => (
             <Button
-              key={item}
+              key={cat}
               size="sm"
               variant="ghost"
               className={
-                category === item
+                category === cat
                   ? "category-filter-btn-selected"
                   : "category-filter-btn-unselected"
               }
-              onClick={() => setCategory(item)}
+              onClick={() => handleChangeCategory(cat)}
             >
-              {item}
+              {cat}
             </Button>
           ))}
         </div>
 
-        {/* 🔍 Search */}
+        {/* Search */}
         <div className="search-box">
           <input
             type="text"
             placeholder="Search"
             value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            onChange={(e) => {
+              setKeyword(e.target.value);
+              setPosts([]);
+              setPage(1);
+              setHasMore(true);
+            }}
           />
           <Search size={16} />
         </div>
 
-        {/* 📱 Mobile category (CSS แสดงเฉพาะ mobile อยู่แล้ว) */}
+        {/* Mobile */}
         <div className="category-mobile">
           <label className="category-label">Category</label>
-          <Select value={category} onValueChange={setCategory}>
+          <Select value={category} onValueChange={handleChangeCategory}>
             <SelectTrigger className="mobile-select-trigger">
               <SelectValue />
             </SelectTrigger>
@@ -104,9 +135,9 @@ function ArticlesSection() {
       </div>
 
       {/* GRID */}
-      <div className="latest-articles__grid">
-        {!loading &&
-          posts.map((post) => (
+      {posts.length > 0 && (
+        <div className="latest-articles__grid">
+          {posts.map((post) => (
             <BlogCard
               key={post.id}
               image={post.image}
@@ -118,7 +149,21 @@ function ArticlesSection() {
               avatar={post.avatar}
             />
           ))}
-      </div>
+        </div>
+      )}
+
+      {/* LOAD MORE */}
+      {hasMore && (
+        <div className="text-center mt-8">
+          <button
+            onClick={handleLoadMore}
+            className="hover:text-muted-foreground font-medium underline"
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "View more"}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

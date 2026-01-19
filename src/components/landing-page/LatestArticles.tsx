@@ -22,9 +22,8 @@ function LatestArticles() {
     <section className="latest-articles">
       <h2 className="section-title">Latest articles</h2>
 
-      {/* ================= Filter Bar ================= */}
+      {/* FILTER BAR */}
       <div className="filter-bar">
-        {/* Desktop category */}
         <Tabs defaultValue="highlight" className="category-list">
           <TabsList className="bg-transparent p-0 gap-2">
             <TabsTrigger value="highlight">Highlight</TabsTrigger>
@@ -34,13 +33,11 @@ function LatestArticles() {
           </TabsList>
         </Tabs>
 
-        {/* Search */}
         <div className="search-box">
           <input type="text" placeholder="Search" />
           <Search className="search-icon" />
         </div>
 
-        {/* Mobile category */}
         <div className="category-mobile">
           <label className="category-label">Category</label>
           <Select defaultValue="highlight">
@@ -57,21 +54,8 @@ function LatestArticles() {
         </div>
       </div>
 
-      {/* ================= Articles ================= */}
-      <div className="articles-two-column">
-        {blogPosts.map((post) => (
-          <BlogCard
-            key={post.id}
-            image={post.image}
-            category={post.category}
-            title={post.title}
-            description={post.description}
-            author={post.author}
-            date={post.date}
-            avatar={post.avatar}
-          />
-        ))}
-      </div>
+      
+     
     </section>
   );
 }

@@ -21,9 +21,6 @@ function BlogSection() {
         ))}
       </div>
   
-        <div className="blog-view-more">
-          <a href="/blog">View more</a>
-        </div>
       </section>
     );
   }
