@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import BlogCard from "./BlogCard";
 import "./BlogSection.css";
 import { blogPosts } from "../../data/blogPosts";
