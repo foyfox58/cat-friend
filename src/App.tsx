@@ -14,7 +14,7 @@ export default function App() {
       <NavBar />
       <HeroSection />
       <ArticlesSection />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <Footer />
       
 
