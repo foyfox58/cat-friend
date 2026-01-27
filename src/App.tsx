@@ -1,23 +1,30 @@
-import './App.css'
-import NavBar from './components/landing-page/NavBar'
-import HeroSection from './components/landing-page/HeroSection'
-import LatestArticles from './components/landing-page/LatestArticles'
-import Footer from './components/landing-page/Footer'
-import BlogCard from './components/landing-page/BlogCard'
-import BlogSection from './components/landing-page/BlogSection'
-import ArticlesSection from './components/landing-page/ArticlesSection'
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import HomePage from "./page/HomePage";
+import ViewPostPage from "./page/ViewPostPage";
+import NotFoundPage from "./page/NotFoundPage";
+
+// 👉 เพิ่ม import
+import { Toaster } from "@/components/ui/sonner";
 
 export default function App() {
   return (
     <div className="app">
-      <NavBar />
-      <HeroSection />
-      <ArticlesSection />
-      {/* <BlogSection /> */}
-      <Footer />
-      
+      <Router>
+        {/* 👉 Toaster */}
+        <Toaster
+          toastOptions={{
+            unstyled: true,
+          }}
+        />
 
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/post/:postId" element={<ViewPostPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Router>
     </div>
-  )
+  );
 }

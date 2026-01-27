@@ -3,7 +3,7 @@ import axios from "axios";
 import "./LatestArticles.css";
 import BlogCard from "./BlogCard";
 import { Button } from "../ui/button";
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 
 import {
   Select,
@@ -16,27 +16,39 @@ import {
 const BASE_URL = "https://blog-post-project-api.vercel.app";
 const categories = ["Highlight", "Cat", "Inspiration", "General"];
 
+type Post = {
+  id: number;
+  image: string;
+  category: string;
+  title: string;
+  description: string;
+  author: string;
+  date: string;
+  avatar?: string;
+};
+
 function ArticlesSection() {
   const [category, setCategory] = useState("Highlight");
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  // 1. จัดการเมื่อ Filter เปลี่ยน (Category หรือ Keyword)
+  // 🔁 reset เมื่อเปลี่ยน filter
   useEffect(() => {
     setPage(1);
-    setPosts([]); // ล้างข้อมูลหน้าจอทันทีเมื่อเปลี่ยนเงื่อนไข
+    setPosts([]);
     setHasMore(true);
   }, [category, keyword]);
 
-  // 2. จัดการการ Fetch ข้อมูล
+  // 📡 fetch posts
   useEffect(() => {
-    let isIgnore = false;
+    let ignore = false;
 
     const fetchPosts = async () => {
       setIsLoading(true);
+
       try {
         const params: any = {
           page,
@@ -47,29 +59,27 @@ function ArticlesSection() {
         if (keyword.trim()) params.keyword = keyword.trim();
 
         const res = await axios.get(`${BASE_URL}/posts`, { params });
-        
-        if (!isIgnore) {
-          const newPosts = res.data.posts || [];
-          
-          setPosts((prev) => {
-            // ถ้าเป็นหน้า 1 ให้ใช้ข้อมูลใหม่เลย ไม่เอาไปต่อท้ายของเก่า
-            return page === 1 ? newPosts : [...prev, ...newPosts];
-          });
 
-          // เช็คว่ายังมีหน้าต่อไปไหม
+        if (!ignore) {
+          const newPosts: Post[] = res.data.posts || [];
+
+          setPosts((prev) =>
+            page === 1 ? newPosts : [...prev, ...newPosts]
+          );
+
           setHasMore(res.data.currentPage < res.data.totalPages);
         }
       } catch (error) {
-        console.error("Fetch error:", error);
+        console.error("Fetch posts error:", error);
       } finally {
-        if (!isIgnore) setIsLoading(false);
+        if (!ignore) setIsLoading(false);
       }
     };
 
     fetchPosts();
 
     return () => {
-      isIgnore = true; // Cleanup function ป้องกันข้อมูลซ้ำซ้อน
+      ignore = true;
     };
   }, [page, category, keyword]);
 
@@ -78,85 +88,95 @@ function ArticlesSection() {
   };
 
   const handleChangeCategory = (value: string) => {
-    if (value === category) return;
-    setCategory(value);
+    if (value !== category) setCategory(value);
   };
 
   return (
-    <section className="latest-articles">
-      <div className="filter-bar">
-        <div className="category-list">
-          {categories.map((cat) => (
-            <Button
-              key={cat}
-              size="sm"
-              variant="ghost"
-              className={
-                category === cat
-                  ? "category-filter-btn-selected"
-                  : "category-filter-btn-unselected"
-              }
-              onClick={() => handleChangeCategory(cat)}
-            >
-              {cat}
-            </Button>
+    <div className="w-full max-w-full mx-auto md:px-6 lg:px-8 mb-20">
+      <section className="latest-articles">
+        {/* 🔍 Filter Bar */}
+        <div className="filter-bar">
+          <div className="category-list">
+            {categories.map((cat) => (
+              <Button
+                key={cat}
+                size="sm"
+                variant="ghost"
+                className={
+                  category === cat
+                    ? "category-filter-btn-selected"
+                    : "category-filter-btn-unselected"
+                }
+                onClick={() => handleChangeCategory(cat)}
+              >
+                {cat}
+              </Button>
+            ))}
+          </div>
+
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <Search size={16} />
+          </div>
+
+          <div className="category-mobile">
+            <label className="category-label">Category</label>
+            <Select value={category} onValueChange={handleChangeCategory}>
+              <SelectTrigger className="mobile-select-trigger">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {item}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* 📰 Articles Grid */}
+        <div className="latest-articles__grid">
+          {posts.map((post) => (
+            <BlogCard key={post.id} {...post} />
           ))}
         </div>
 
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          />
-          <Search size={16} />
-        </div>
+        {/* ⬇️ Load More */}
+        {hasMore && posts.length > 0 && (
+          <div className="text-center mt-20">
+            <button
+              onClick={handleLoadMore}
+              disabled={isLoading}
+              className={`font-medium ${
+                !isLoading ? "underline hover:text-muted-foreground" : ""
+              }`}
+            >
+              {isLoading ? (
+                <div className="flex flex-col items-center min-h-lvh">
+                  <Loader2 className="w-12 h-12 animate-spin text-foreground" />
+                  <p className="mt-4">Loading...</p>
+                </div>
+              ) : (
+                "View more"
+              )}
+            </button>
+          </div>
+        )}
 
-        <div className="category-mobile">
-          <label className="category-label">Category</label>
-          <Select value={category} onValueChange={handleChangeCategory}>
-            <SelectTrigger className="mobile-select-trigger">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((item) => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-   
-      <div className="latest-articles__grid">
-        {posts.map((post, index) => (
-          // ใช้ id ร่วมกับ index เพื่อป้องกัน key ซ้ำกรณีฉุกเฉิน
-          <BlogCard key={`${post.id}-${index}`} {...post} />
-        ))}
-      </div>
-
-      {/* ส่วนปุ่ม View More จะอยู่ล่างสุดเสมอ */}
-      {hasMore && posts.length > 0 && (
-        <div className="text-center mt-8">
-          <button
-            onClick={handleLoadMore}
-            disabled={isLoading}
-            className="hover:text-muted-foreground font-medium underline"
-          >
-            {isLoading ? "Loading..." : "View more"}
-          </button>
-        </div>
-      )}
-
-      {!isLoading && posts.length === 0 && (
-        <div className="text-center mt-8 text-gray-500">
-          No articles found.
-        </div>
-      )}
-    </section>
+        {!isLoading && posts.length === 0 && (
+          <div className="text-center mt-8 text-gray-500">
+            No articles found.
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
 
