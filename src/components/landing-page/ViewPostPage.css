@@ -8,13 +8,13 @@
 
 /* ---------- Full width image ---------- */
 .post-image {
-  display: block;        /* สำคัญมาก */
+  display: block;
   width: 1200px;
   max-width: 100%;
   height: 420px;
   object-fit: cover;
   border-radius: 24px;
-  margin: 24px auto 40px; /* auto = center */
+  margin: 24px auto 40px;
 }
 
 /* ================= CONTENT + SIDEBAR ================= */
@@ -25,7 +25,8 @@
   gap: 48px;
 }
 
-/* ---------- Main content ---------- */
+/* ================= MAIN CONTENT ================= */
+
 .post-meta {
   display: flex;
   gap: 12px;
@@ -38,20 +39,42 @@
   color: #15803d;
   padding: 4px 12px;
   border-radius: 999px;
+  font-size: 0.8rem;
 }
 
 .post-title {
   font-size: 2.2rem;
   margin: 16px 0;
+  line-height: 1.2;
 }
 
 .post-description {
   color: #555;
   margin-bottom: 32px;
+  font-size: 1rem;
 }
 
 .markdown {
   line-height: 1.8;
+  font-size: 1rem;
+  color: #222;
+}
+
+.markdown p {
+  margin-bottom: 16px;
+}
+
+/* ================= SEARCH HIGHLIGHT ================= */
+
+.markdown span {
+  color: red;
+  font-weight: 600;
+}
+
+.post-title span,
+.post-description span {
+  color: red;
+  font-weight: 700;
 }
 
 /* ================= SHARE ================= */
@@ -74,6 +97,7 @@
   border-radius: 999px;
   border: 1px solid #ddd;
   background: white;
+  cursor: pointer;
 }
 
 .share-right {
@@ -89,6 +113,7 @@
   border-radius: 999px;
   border: 1px solid #ddd;
   background: white;
+  cursor: pointer;
 }
 
 .social {
@@ -119,6 +144,10 @@
   margin-top: 48px;
 }
 
+.comment-section h3 {
+  margin-bottom: 12px;
+}
+
 .comment-action {
   display: flex;
   justify-content: flex-end;
@@ -130,6 +159,7 @@
   color: white;
   padding: 8px 20px;
   border-radius: 999px;
+  cursor: pointer;
 }
 
 .comment-list {
@@ -146,6 +176,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.comment-item p {
+  margin-top: 4px;
+  color: #333;
 }
 
 /* ================= SIDEBAR (AUTHOR) ================= */
@@ -195,6 +230,7 @@
   border-radius: 999px;
   background: black;
   color: white;
+  cursor: pointer;
 }
 
 .dialog-close {
@@ -202,6 +238,8 @@
   top: 12px;
   right: 12px;
   border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .toast-success {

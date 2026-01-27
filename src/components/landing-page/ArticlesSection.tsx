@@ -102,6 +102,7 @@ function ArticlesSection() {
                 key={cat}
                 size="sm"
                 variant="ghost"
+                disabled={isLoading}
                 className={
                   category === cat
                     ? "category-filter-btn-selected"
@@ -141,12 +142,22 @@ function ArticlesSection() {
           </div>
         </div>
 
+        {/* 🔄 Loading (ตอนเปลี่ยน Category / Search) */}
+        {isLoading && page === 1 && (
+          <div className="flex flex-col items-center justify-center min-h-[300px]">
+            <Loader2 className="w-12 h-12 animate-spin text-foreground" />
+            <p className="mt-4">Loading...</p>
+          </div>
+        )}
+
         {/* 📰 Articles Grid */}
-        <div className="latest-articles__grid">
-          {posts.map((post) => (
-            <BlogCard key={post.id} {...post} />
-          ))}
-        </div>
+        {!isLoading && (
+          <div className="latest-articles__grid">
+            {posts.map((post) => (
+              <BlogCard key={post.id} {...post} />
+            ))}
+          </div>
+        )}
 
         {/* ⬇️ Load More */}
         {hasMore && posts.length > 0 && (
@@ -159,9 +170,9 @@ function ArticlesSection() {
               }`}
             >
               {isLoading ? (
-                <div className="flex flex-col items-center min-h-lvh">
-                  <Loader2 className="w-12 h-12 animate-spin text-foreground" />
-                  <p className="mt-4">Loading...</p>
+                <div className="flex flex-col items-center">
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                  <p className="mt-2">Loading...</p>
                 </div>
               ) : (
                 "View more"
@@ -170,6 +181,7 @@ function ArticlesSection() {
           </div>
         )}
 
+        {/* ❌ ไม่พบข้อมูล */}
         {!isLoading && posts.length === 0 && (
           <div className="text-center mt-8 text-gray-500">
             No articles found.

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import NavBar from "@/components/landing-page/NavBar";
 import HeroSection from "@/components/landing-page/HeroSection";
 import ArticlesSection from "@/components/landing-page/ArticlesSection";
