@@ -1,5 +1,6 @@
 import "./Footer.css";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -23,10 +24,14 @@ function Footer() {
 
       {/* Right */}
       <div className="footer-right">
-        <a href="#">Home page</a>
+        <Link to="/">
+          <a href="#">Home page</a>
+        </Link>
       </div>
     </footer>
   );
 }
 
 export default Footer;
+
+
