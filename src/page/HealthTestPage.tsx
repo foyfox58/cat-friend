@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = (import.meta as any).env.VITE_API_BASE_URL;
 
 const HealthTestPage = () => {
     const [result, setResult] = useState<any>(null);

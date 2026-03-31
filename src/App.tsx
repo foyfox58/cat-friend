@@ -24,7 +24,7 @@ import AdminCreateCategoryPage from "./page/admin/AdminCreateCategoryPage";
 import AdminEditCategoryPage from "./page/admin/AdminEditCategoryPage";
 import AdminEditArticlePage from "./page/admin/AdminEditArticlePage";
 import AdminMemberManagementPage from "./page/admin/AdminMemberManagementPage";
-import CreatePostComponent from "./page/admin/That file";
+import CreatePostComponent from "./page/admin/ThatFile";
 
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
