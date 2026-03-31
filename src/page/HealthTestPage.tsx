@@ -4,8 +4,8 @@ import { useState } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const HealthTestPage = () => {
-    const [result, setResult] = useState(null);
-    const [error, setError] = useState(null);
+    const [result, setResult] = useState<any>(null);
+    const [error, setError] = useState<any>(null);
     const [loading, setLoading] = useState(false);
 
     const testHealth = async () => {
@@ -16,7 +16,7 @@ const HealthTestPage = () => {
         try {
             const res = await axios.get(`${API_BASE_URL}/health`);
             setResult(res.data);
-        } catch (err) {
+        } catch (err: any) {
             setError({
                 status: err.response?.status,
                 data: err.response?.data,
