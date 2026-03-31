@@ -23,7 +23,7 @@ export default function AdminResetPasswordPage() {
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const isValidPassword = password.trim() !== "";
     const isValidNewPassword = newPassword.trim() !== "";
@@ -156,7 +156,11 @@ export default function AdminResetPasswordPage() {
   );
 }
 
-function ResetPasswordModal({ dialogState, setDialogState, resetFunction }) {
+function ResetPasswordModal({
+  dialogState,
+  setDialogState,
+  resetFunction,
+}: any) {
   return (
     <AlertDialog open={dialogState} onOpenChange={setDialogState}>
       <AlertDialogContent className="bg-white rounded-md pt-16 pb-6 max-w-[22rem] sm:max-w-md flex flex-col items-center">

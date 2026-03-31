@@ -9,7 +9,7 @@ export default function AdminLoginPage() {
   const [isErrorPassword, setIsErrorPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     let valid = true;

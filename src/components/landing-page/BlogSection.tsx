@@ -17,6 +17,7 @@ function BlogSection() {
             description={post.description}
             author={post.author}
             date={post.date}
+            id={post.id}
           />
         ))}
       </div>
